@@ -1,5 +1,5 @@
 {
-  "name": "react-native-pin-input",
+  "name": "rn-pin-entry",
   "version": "1.0.0",
   "description": "A simple, lightweight, customizable PIN code input component for React Native.",
   "source": "./src/index.tsx",
@@ -51,14 +51,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bittu/react-native-pin-input.git"
+    "url": "git+https://github.com/bittu/rn-pin-entry.git"
   },
   "author": "Sandeep Vemula <vsandeep414@gmail.com> (https://github.com/bittu)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bittu/react-native-pin-input/issues"
+    "url": "https://github.com/bittu/rn-pin-entry/issues"
   },
-  "homepage": "https://github.com/bittu/react-native-pin-input#readme",
+  "homepage": "https://github.com/bittu/rn-pin-entry#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
