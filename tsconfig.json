@@ -2,7 +2,7 @@
   "compilerOptions": {
     "rootDir": ".",
     "paths": {
-      "react-native-pin-input": ["./src/index"]
+      "rn-pin-entry": ["./src/index"]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,

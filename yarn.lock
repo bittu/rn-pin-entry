@@ -11660,22 +11660,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-pin-input-example@workspace:example":
-  version: 0.0.0-use.local
-  resolution: "react-native-pin-input-example@workspace:example"
-  dependencies:
-    "@babel/core": ^7.20.0
-    "@expo/metro-runtime": ~4.0.1
-    expo: ~52.0.39
-    expo-status-bar: ~2.0.1
-    react: 18.3.1
-    react-dom: 18.3.1
-    react-native: 0.76.7
-    react-native-builder-bob: ^0.38.0
-    react-native-web: ~0.19.13
-  languageName: unknown
-  linkType: soft
-
 "react-native-web@npm:~0.19.13":
   version: 0.19.13
   resolution: "react-native-web@npm:0.19.13"
@@ -12265,6 +12249,22 @@ __metadata:
   checksum: 3ea587b981a19016297edb96d1ffe48af7e6af69660e3b371dbfc73722a73a0b0e9be5c88089fbeeb866c389c1098e07f64929c7414290504b855f54f901ab10
   languageName: node
   linkType: hard
+
+"rn-pin-entry-example@workspace:example":
+  version: 0.0.0-use.local
+  resolution: "rn-pin-entry-example@workspace:example"
+  dependencies:
+    "@babel/core": ^7.20.0
+    "@expo/metro-runtime": ~4.0.1
+    expo: ~52.0.39
+    expo-status-bar: ~2.0.1
+    react: 18.3.1
+    react-dom: 18.3.1
+    react-native: 0.76.7
+    react-native-builder-bob: ^0.38.0
+    react-native-web: ~0.19.13
+  languageName: unknown
+  linkType: soft
 
 "rn-pin-entry@workspace:.":
   version: 0.0.0-use.local

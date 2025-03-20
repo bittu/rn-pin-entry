@@ -37,6 +37,7 @@
     "!**/.*"
   ],
   "scripts": {
+    "example": "yarn workspace rn-pin-entry example",
     "test": "jest",
     "typecheck": "tsc",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",

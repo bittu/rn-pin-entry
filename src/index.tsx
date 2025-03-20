@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   },
 });
 
-interface RNPinInputProps {
+interface RNPinEntryProps {
   value?: string;
   codeLength?: number;
   cellSize?: number;
@@ -82,12 +82,12 @@ interface RNPinInputProps {
   disableFullscreenUI?: boolean;
 }
 
-interface RNPinInputState {
+interface RNPinEntryState {
   maskDelay: boolean;
   focused: boolean;
 }
 
-class RNPinInput extends Component<RNPinInputProps, RNPinInputState> {
+class RNPinEntry extends Component<RNPinEntryProps, RNPinEntryState> {
   state = {
     maskDelay: false,
     focused: false,
@@ -342,4 +342,4 @@ class RNPinInput extends Component<RNPinInputProps, RNPinInputState> {
   };
 }
 
-export default RNPinInput;
+export default RNPinEntry;

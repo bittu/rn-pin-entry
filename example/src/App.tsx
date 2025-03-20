@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import RNPinInput from 'react-native-pin-input';
+import RNPinEntry from 'rn-pin-entry';
 
 interface AppState {
   code: string;
@@ -13,7 +13,7 @@ export default class App extends React.Component<{}, AppState> {
     password: '',
   };
 
-  pinInput = React.createRef<RNPinInput>();
+  pinInput = React.createRef<RNPinEntry>();
 
   _checkCode = (code: string): void => {
     if (code !== '1234') {
@@ -28,7 +28,7 @@ export default class App extends React.Component<{}, AppState> {
       <View style={styles.container}>
         <View style={styles.section}>
           <Text style={styles.title}>Default</Text>
-          <RNPinInput
+          <RNPinEntry
             ref={this.pinInput}
             value={code}
             onTextChange={(c: string) => this.setState({ code: c })}
@@ -39,9 +39,10 @@ export default class App extends React.Component<{}, AppState> {
 
         <View style={styles.section}>
           <Text style={styles.title}>Password</Text>
-          <RNPinInput
+          <RNPinEntry
             password
             mask="﹡"
+            keyboardType="default"
             cellSize={36}
             codeLength={8}
             value={password}
@@ -51,7 +52,7 @@ export default class App extends React.Component<{}, AppState> {
 
         <View style={styles.section}>
           <Text style={styles.title}>Underline</Text>
-          <RNPinInput
+          <RNPinEntry
             cellStyle={styles.underlineCellStyle}
             cellStyleFocused={styles.underlineCelStyleFocused}
             value={code}
@@ -61,7 +62,7 @@ export default class App extends React.Component<{}, AppState> {
 
         <View style={styles.section}>
           <Text style={styles.title}>Customized</Text>
-          <RNPinInput
+          <RNPinEntry
             placeholder="⭑"
             cellStyle={styles.customizedCelLStyle}
             cellStyleFocused={styles.customizedCellStyleFocused}
@@ -74,7 +75,7 @@ export default class App extends React.Component<{}, AppState> {
 
         <View style={styles.section}>
           <Text style={styles.title}>Custom Placeholder</Text>
-          <RNPinInput
+          <RNPinEntry
             placeholder={<View style={styles.customPlaceHolder} />}
             mask={<View style={styles.customPlaceHolderMask} />}
             maskDelay={1000}
