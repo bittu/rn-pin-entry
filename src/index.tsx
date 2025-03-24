@@ -9,6 +9,7 @@ import {
   type TextStyle,
   type KeyboardTypeOptions,
   type TextInputProps,
+  TouchableOpacity,
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 
@@ -46,7 +47,7 @@ const styles = StyleSheet.create({
   },
   hiddenInput: {
     flex: 1,
-    opacity: 0,
+    opacity: 0.1,
     textAlign: 'center',
   },
 });
@@ -180,6 +181,10 @@ class RNPinEntry extends Component<RNPinEntryProps, RNPinEntryState> {
     }
   };
 
+  _forceFocus = (): void => {
+    this.inputRef.current!.focus();
+  };
+
   componentWillUnmount(): void {
     clearTimeout(this.maskTimeout);
   }
@@ -214,111 +219,117 @@ class RNPinEntry extends Component<RNPinEntryProps, RNPinEntryState> {
     const valLen = value?.length || 0;
 
     return (
-      <Animatable.View
-        ref={this.ref}
-        style={[
-          containerStyle,
-          {
-            width: cellSize! * codeLength! + cellSpacing! * (codeLength! - 1),
-            height: cellSize!,
-          },
-        ]}
-      >
-        <View style={styles.cellContainer}>
-          {Array.apply(null, Array(codeLength)).map((_, idx) => {
-            const cellFocused = focused && idx === valLen;
-            const filled = idx < valLen;
-            const last = idx === valLen - 1;
-            const showMask = filled && password && (!maskDelay || !last);
-            const isPlaceholderText = typeof placeholder === 'string';
-            const isMaskText = typeof mask === 'string';
-            const pinCodeChar = value?.charAt(idx);
+      <TouchableOpacity onPress={this._forceFocus}>
+        <Animatable.View
+          ref={this.ref}
+          style={[
+            containerStyle,
+            {
+              width: cellSize! * codeLength! + cellSpacing! * (codeLength! - 1),
+              height: cellSize!,
+            },
+          ]}
+        >
+          <View style={styles.cellContainer}>
+            {Array.apply(null, Array(codeLength)).map((_, idx) => {
+              const cellFocused = focused && idx === valLen;
+              const filled = idx < valLen;
+              const last = idx === valLen - 1;
+              const showMask = filled && password && (!maskDelay || !last);
+              const isPlaceholderText = typeof placeholder === 'string';
+              const isMaskText = typeof mask === 'string';
+              const pinCodeChar = value?.charAt(idx);
 
-            let cellText = null;
+              let cellText = null;
 
-            if (filled || placeholder !== null) {
-              if (showMask && isMaskText) {
-                cellText = mask;
-              } else if (!filled && isPlaceholderText) {
-                cellText = placeholder;
-              } else if (pinCodeChar) {
-                cellText = pinCodeChar;
-              }
-            }
-
-            const placeholderComponent = !isPlaceholderText
-              ? placeholder
-              : null;
-
-            const maskComponent = showMask && !isMaskText ? mask : null;
-
-            const isCellText = typeof cellText === 'string';
-
-            return (
-              <Animatable.View
-                key={idx}
-                style={[
-                  {
-                    width: cellSize!,
-                    height: cellSize!,
-                    marginLeft: cellSpacing! / 2,
-                    marginRight: cellSpacing! / 2,
-                  },
-                  styles.cell,
-                  cellStyle,
-                  cellStyleFocused ? cellStyleFocused : styles.cellFocused,
-                  filled ? cellStyleFilled : {},
-                ]}
-                animation={
-                  idx === valLen && focused && animated ? animationFocused : ''
+              if (filled || placeholder !== null) {
+                if (showMask && isMaskText) {
+                  cellText = mask;
+                } else if (!filled && isPlaceholderText) {
+                  cellText = placeholder;
+                } else if (pinCodeChar) {
+                  cellText = pinCodeChar;
                 }
-                iterationCount="infinite"
-                duration={500}
-              >
-                {isCellText && !maskComponent && (
-                  <Text
-                    style={[
-                      styles.text,
-                      textStyle,
-                      cellFocused ? textStyleFocused || styles.textFocused : {},
-                    ]}
-                  >
-                    {cellText}
-                  </Text>
-                )}
+              }
 
-                {!isCellText && !maskComponent && placeholderComponent}
+              const placeholderComponent = !isPlaceholderText
+                ? placeholder
+                : null;
 
-                {isCellText && maskComponent}
-              </Animatable.View>
-            );
-          })}
-        </View>
+              const maskComponent = showMask && !isMaskText ? mask : null;
 
-        <TextInput
-          disableFullscreenUI={disableFullscreenUI}
-          value={value}
-          ref={this.inputRef}
-          onChangeText={this._inputCode}
-          onKeyPress={this._keyPress}
-          onFocus={() => this._onFocused()}
-          onBlur={() => this._onBlurred()}
-          spellCheck={false}
-          autoFocus={autoFocus}
-          keyboardType={keyboardType}
-          numberOfLines={1}
-          caretHidden
-          maxLength={codeLength!}
-          selection={{
-            start: valLen,
-            end: valLen,
-          }}
-          style={styles.hiddenInput}
-          testID={testID || undefined}
-          editable={editable}
-          {...inputProps}
-        />
-      </Animatable.View>
+              const isCellText = typeof cellText === 'string';
+
+              return (
+                <Animatable.View
+                  key={idx}
+                  style={[
+                    {
+                      width: cellSize!,
+                      height: cellSize!,
+                      marginLeft: cellSpacing! / 2,
+                      marginRight: cellSpacing! / 2,
+                    },
+                    styles.cell,
+                    cellStyle,
+                    cellStyleFocused ? cellStyleFocused : styles.cellFocused,
+                    filled ? cellStyleFilled : {},
+                  ]}
+                  animation={
+                    idx === valLen && focused && animated
+                      ? animationFocused
+                      : ''
+                  }
+                  iterationCount="infinite"
+                  duration={500}
+                >
+                  {isCellText && !maskComponent && (
+                    <Text
+                      style={[
+                        styles.text,
+                        textStyle,
+                        cellFocused
+                          ? textStyleFocused || styles.textFocused
+                          : {},
+                      ]}
+                    >
+                      {cellText}
+                    </Text>
+                  )}
+
+                  {!isCellText && !maskComponent && placeholderComponent}
+
+                  {isCellText && maskComponent}
+                </Animatable.View>
+              );
+            })}
+          </View>
+
+          <TextInput
+            disableFullscreenUI={disableFullscreenUI}
+            value={value}
+            ref={this.inputRef}
+            onChangeText={this._inputCode}
+            onKeyPress={this._keyPress}
+            onFocus={() => this._onFocused()}
+            onBlur={() => this._onBlurred()}
+            spellCheck={false}
+            autoFocus={autoFocus}
+            keyboardType={keyboardType}
+            numberOfLines={1}
+            caretHidden
+            maxLength={codeLength!}
+            selection={{
+              start: valLen,
+              end: valLen,
+            }}
+            style={styles.hiddenInput}
+            testID={testID || undefined}
+            editable={editable}
+            {...inputProps}
+          />
+        </Animatable.View>
+      </TouchableOpacity>
     );
   }
 
