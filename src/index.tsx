@@ -272,7 +272,10 @@ class RNPinEntry extends Component<RNPinEntryProps, RNPinEntryState> {
                     },
                     styles.cell,
                     cellStyle,
-                    cellStyleFocused ? cellStyleFocused : styles.cellFocused,
+                    cellFocused &&
+                      (cellStyleFocused
+                        ? cellStyleFocused
+                        : styles.cellFocused),
                     filled ? cellStyleFilled : {},
                   ]}
                   animation={

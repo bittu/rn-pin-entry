@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     borderColor: 'gray',
   },
   underlineCelStyleFocused: {
-    borderColor: 'black',
+    borderColor: 'red',
   },
   customizedCelLStyle: {
     borderWidth: 2,
