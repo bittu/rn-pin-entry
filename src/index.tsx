@@ -295,6 +295,7 @@ class RNPinEntry extends Component<RNPinEntryProps, RNPinEntryState> {
                           ? textStyleFocused || styles.textFocused
                           : {},
                       ]}
+                      testID={`pinText-${idx}`}
                     >
                       {cellText}
                     </Text>
