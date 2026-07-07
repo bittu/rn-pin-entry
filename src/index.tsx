@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   },
   hiddenInput: {
     flex: 1,
-    opacity: 0.1,
+    opacity: 0,
     textAlign: 'center',
   },
 });
